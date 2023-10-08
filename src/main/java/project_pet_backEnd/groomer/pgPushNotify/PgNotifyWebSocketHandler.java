@@ -33,8 +33,8 @@ public class PgNotifyWebSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         String connector = (String) session.getAttributes().get("connect");
-        if (!redisTemplate.hasKey("pgUserNotify:" + connector))
-            redisTemplate.opsForList().leftPush("pgUserNotify:" + connector, "");
+        if (!redisTemplate.hasKey("UserNotify:" + connector))
+            redisTemplate.opsForList().leftPush("UserNotify:" + connector, "");
         sessionMap.put(connector + "-" + session.getId(), session);
     }
 
@@ -48,9 +48,9 @@ public class PgNotifyWebSocketHandler extends TextWebSocketHandler {
             throw new RuntimeException(e);
         }
         TextMessage textMessage = new TextMessage(jsNotifyMsg);
-        Set<String> notifyKeys = getKeys("pgUserNotify:userId_*");
-        if (!notifyKeys.contains("pgUserNotify:userId_"+userId))
-            redisTemplate.opsForList().leftPush("pgUserNotify:userId_" + userId, jsNotifyMsg);
+        Set<String> notifyKeys = getKeys("UserNotify:userId_*");
+        if (!notifyKeys.contains("UserNotify:userId_"+userId))
+            redisTemplate.opsForList().leftPush("UserNotify:userId_" + userId, jsNotifyMsg);
 
         for (String key : sessionMap.keySet()) {
             if( key.split("-")[0].contains("userId_"+userId) &&sessionMap.get(key).isOpen()) {
@@ -66,11 +66,11 @@ public class PgNotifyWebSocketHandler extends TextWebSocketHandler {
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
         // 當連線後先去 redis 拿對應的 history
         String userId = AllDogCatUtils.getKeyByValue(sessionMap, session).split("-")[0];
-        Long lsSize= redisTemplate.opsForList().size("pgUserNotify:" + userId);
+        Long lsSize= redisTemplate.opsForList().size("UserNotify:" + userId);
         for(long i =0; i<lsSize;i++){
-            if(redisTemplate.opsForList().index("pgUserNotify:" + userId,0).equals(""))//最後一個不移除
+            if(redisTemplate.opsForList().index("UserNotify:" + userId,0).equals(""))//最後一個不移除
                 continue;
-            String msg =redisTemplate.opsForList().leftPop("pgUserNotify:" + userId);
+            String msg =redisTemplate.opsForList().leftPop("UserNotify:" + userId);
             session.sendMessage(new TextMessage(msg));
         }
     }

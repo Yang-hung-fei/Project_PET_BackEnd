@@ -3,11 +3,13 @@ package project_pet_backEnd.productMall.order.service;
 import org.springframework.data.domain.Pageable;
 import project_pet_backEnd.productMall.order.dto.ChangeOrderStatusDTO;
 import project_pet_backEnd.productMall.order.dto.CreateOrderDTO;
+import project_pet_backEnd.productMall.order.dto.FonPaySaveDTO;
 import project_pet_backEnd.productMall.order.dto.response.AllOrdersResDTO;
 import project_pet_backEnd.productMall.order.dto.response.OrderResDTO;
 import project_pet_backEnd.productMall.order.dto.response.OrdersNotCancelDTO;
 import project_pet_backEnd.productMall.order.dto.response.OrdersResTestDTO;
 import project_pet_backEnd.productMall.order.vo.Orders;
+import project_pet_backEnd.utils.commonDto.ResultResponse;
 
 import java.util.List;
 
@@ -57,4 +59,11 @@ public interface OrdersService {
 
     //查詢全部訂單商業邏輯
     public abstract List<Orders> selectAll();
+
+
+    //--------------------------------------------------------------------------------------------------
+
+    //FonPay 創建金流付款成功後存入交易ID
+
+    public ResultResponse<String> apiIdSaveByOrdNo(Integer ordNo, FonPaySaveDTO fonPaySaveDTO );
 }

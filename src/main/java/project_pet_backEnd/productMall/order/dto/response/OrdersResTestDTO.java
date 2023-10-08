@@ -20,4 +20,8 @@ public class OrdersResTestDTO {
     private String recipientName;
     private String recipientAddress;
     private String recipientPh;
+    private String paymentTransactionId;
+    private String refundNo;
+    private String paymentUrl;
+
 }

@@ -10,10 +10,7 @@ import project_pet_backEnd.productMall.lineNotify.service.LineNotifyService;
 import project_pet_backEnd.productMall.order.dao.OrdersDao;
 import project_pet_backEnd.productMall.order.dao.OrdersDetailRepository;
 import project_pet_backEnd.productMall.order.dao.OrdersRepository;
-import project_pet_backEnd.productMall.order.dto.ChangeOrderStatusDTO;
-import project_pet_backEnd.productMall.order.dto.CreateOrderDTO;
-import project_pet_backEnd.productMall.order.dto.DeleteOrderDTO;
-import project_pet_backEnd.productMall.order.dto.OrderDetailByCreateDTO;
+import project_pet_backEnd.productMall.order.dto.*;
 import project_pet_backEnd.productMall.order.dto.response.*;
 import project_pet_backEnd.productMall.order.service.OrdersService;
 import project_pet_backEnd.productMall.order.vo.OrderDetail;
@@ -23,6 +20,7 @@ import project_pet_backEnd.smtp.EmailService;
 import project_pet_backEnd.smtp.dto.EmailResponse;
 import project_pet_backEnd.user.dao.UserRepository;
 import project_pet_backEnd.user.vo.User;
+import project_pet_backEnd.utils.commonDto.ResultResponse;
 
 import javax.transaction.Transactional;
 import java.util.*;
@@ -314,4 +312,18 @@ public class OrdersServiceImpl implements OrdersService {
         return list;
     }
 
+    @Override
+    @Transactional
+    public ResultResponse<String> apiIdSaveByOrdNo(Integer ordNo, FonPaySaveDTO fonPaySaveDTO) {
+        Orders byOrdNo = ordersRepository.findByOrdNo(ordNo);
+        if(byOrdNo==null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "無此訂單,請重新提供正確編號");
+        }
+        byOrdNo.setPaymentTransactionId(fonPaySaveDTO.getPaymentTransactionId());
+        byOrdNo.setPaymentUrl(fonPaySaveDTO.getPaymentUrl());
+        ordersRepository.save(byOrdNo);
+        ResultResponse<String> rs = new ResultResponse<>();
+        rs.setMessage("成功!");
+        return rs;
+    }
 }

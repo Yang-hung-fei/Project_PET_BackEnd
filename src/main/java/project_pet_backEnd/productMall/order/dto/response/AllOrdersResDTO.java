@@ -22,5 +22,7 @@ public class AllOrdersResDTO {
     private String recipientPh;
     private Integer ordStatus;
     private Integer ordPayStatus;
-
+    private String paymentTransactionId;
+    private String refundNo;
+    private String paymentUrl;
 }

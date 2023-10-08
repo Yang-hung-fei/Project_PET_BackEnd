@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import project_pet_backEnd.productMall.order.dto.ChangeOrderStatusDTO;
 import project_pet_backEnd.productMall.order.dto.CreateOrderDTO;
+import project_pet_backEnd.productMall.order.dto.FonPaySaveDTO;
 import project_pet_backEnd.productMall.order.dto.response.OrderResDTO;
 import project_pet_backEnd.productMall.order.dto.response.OrdersNotCancelDTO;
 import project_pet_backEnd.productMall.order.service.OrdersService;
@@ -90,5 +91,14 @@ public class UserOrderController {
         ResultResponse rs = new ResultResponse();
         rs.setMessage(ordersService.getUserPoint(userId));
         return ResponseEntity.status(HttpStatus.OK).body(rs);
+    }
+
+    @ApiOperation(value = "v", notes = "儲存交易金流ID")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization_U", value = "User Access Token",
+                    required = true, dataType = "string", paramType = "header")})
+    @PutMapping("/saveFonPayId/{ordNo}")
+    public ResultResponse<String> saveFonPayId(@PathVariable Integer ordNo,@RequestBody FonPaySaveDTO fonPaySaveDTO){
+        return ordersService.apiIdSaveByOrdNo(ordNo,fonPaySaveDTO);
     }
 }

@@ -38,5 +38,8 @@ public class FindByOrdNoResDTO {
     private Integer qty;
     private Integer price;
     private String pdName;
+    private String paymentTransactionId;
+    private String refundNo;
+    private String paymentUrl;
 
 }

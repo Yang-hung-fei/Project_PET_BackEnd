@@ -78,6 +78,15 @@ public class Orders {
     @NotNull
     private Integer userPoint;
 
+    @Column(name = "PAYMENT_TRANSACTION_ID")
+    private String paymentTransactionId;
+
+    @Column(name = "REFUND_NO")
+    private String refundNo;
+
+    @Column(name = "PAYMENT_URL")
+    private String paymentUrl;
+
 //    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<OrderDetail> detailList;
 }
