@@ -81,9 +81,10 @@ public class OrdersDaoImpl implements OrdersDao {
                 ordersResTestDTO.setRecipientName(rs.getString("RECIPIENT"));
                 ordersResTestDTO.setRecipientAddress(rs.getString("RECIPIENT_ADDRESS"));
                 ordersResTestDTO.setRecipientPh(rs.getString("RECIPIENT_PH"));
-                ordersResTestDTO.setPaymentTransactionId("PAYMENT_TRANSACTION_ID");
-                ordersResTestDTO.setRefundNo("REFUND_NO");
-                ordersResTestDTO.setPaymentUrl("PAYMENT_URL");
+                ordersResTestDTO.setPaymentTransactionId(rs.getString("PAYMENT_TRANSACTION_ID"));
+                ordersResTestDTO.setRefundNo(rs.getString("REFUND_NO"));
+                ordersResTestDTO.setPaymentUrl(rs.getString("PAYMENT_URL"));
+                ordersResTestDTO.setPaymentMethod(rs.getInt("PAYMENT_METHOD"));
                 return ordersResTestDTO;
             }
         });

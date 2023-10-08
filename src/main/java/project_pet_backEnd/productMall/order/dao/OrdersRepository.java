@@ -20,7 +20,7 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
             "o.ordNo, o.userId, o.ordStatus, o.ordPayStatus, o.ordPick, " +
             "o.ordCreate, o.ordFinish, o.ordFee, o.totalAmount, o.orderAmount, " +
             "o.recipientName, o.recipientAddress, o.recipientPh, o.evaluateStatus, " +
-            "o.userPoint, o.paymentTransactionId, o.refundNo, o.paymentUrl) FROM Orders o " +
+            "o.userPoint, o.paymentTransactionId, o.refundNo, o.paymentUrl, o.paymentMethod) FROM Orders o " +
             "WHERE o.ordStatus <> :ordStatus AND o.userId = :userId")
     List<OrdersNotCancelDTO> findByOrdStatusNotCancel(@Param("userId") Integer userId,
                                                       @Param("ordStatus") Integer ordStatus);
@@ -32,7 +32,7 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
             "o.ordPick, o.ordCreate, o.ordFinish, o.ordFee, " +
             "o.totalAmount, o.orderAmount, o.recipientName, " +
             "o.recipientAddress, o.recipientPh, o.userPoint," +
-            "o.evaluateStatus, ol.qty, ol.price, p.pdName, o.paymentTransactionId, o.refundNo, o.paymentUrl) " +
+            "o.evaluateStatus, ol.qty, ol.price, p.pdName, o.paymentTransactionId, o.refundNo, o.paymentUrl, o.paymentMethod) " +
             "FROM Orders o " +
             "JOIN project_pet_backEnd.user.vo.User u ON o.userId = u.userId " +
             "JOIN project_pet_backEnd.productMall.userPayment.vo.OrderList ol ON o.ordNo = ol.ordNo " +
@@ -49,7 +49,7 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
             "o.recipientName, " +
             "o.recipientPh, " +
             "o.ordStatus, " +
-            "o.ordPayStatus, o.paymentTransactionId, o.refundNo, o.paymentUrl) " +
+            "o.ordPayStatus, o.paymentTransactionId, o.refundNo, o.paymentUrl, o.paymentMethod) " +
             "FROM Orders o " +
             "JOIN project_pet_backEnd.user.vo.User u ON o.userId = u.userId")
     List<AllOrdersResDTO> findAllOrdersList(Pageable pageable);

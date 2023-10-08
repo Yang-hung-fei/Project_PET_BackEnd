@@ -36,6 +36,7 @@ public class OrderResDTO {
     private String paymentTransactionId;
     private String refundNo;
     private String paymentUrl;
+    private Integer paymentMethod;
 
 
     private List<OrderDetailResDTO> detailList = new ArrayList<>();

@@ -41,6 +41,7 @@ public class OrdersNotCancelDTO {
     private String paymentTransactionId;
     private String refundNo;
     private String paymentUrl;
+    private Integer paymentMethod;
 
 
 }

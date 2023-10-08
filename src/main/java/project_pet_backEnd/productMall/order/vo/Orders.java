@@ -87,6 +87,9 @@ public class Orders {
     @Column(name = "PAYMENT_URL")
     private String paymentUrl;
 
+    @Column(name = "PAYMENT_METHOD")
+    private Integer paymentMethod;
+
 //    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<OrderDetail> detailList;
 }

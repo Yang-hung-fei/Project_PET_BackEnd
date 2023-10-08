@@ -41,5 +41,6 @@ public class FindByOrdNoResDTO {
     private String paymentTransactionId;
     private String refundNo;
     private String paymentUrl;
+    private Integer paymentMethod;
 
 }

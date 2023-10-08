@@ -23,5 +23,6 @@ public class OrdersResTestDTO {
     private String paymentTransactionId;
     private String refundNo;
     private String paymentUrl;
+    private Integer paymentMethod;
 
 }
