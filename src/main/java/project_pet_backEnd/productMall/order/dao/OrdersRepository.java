@@ -16,6 +16,8 @@ import java.util.List;
 public interface OrdersRepository extends JpaRepository<Orders, Integer> {
     List<Orders> findByUserId(Integer userId);
 
+    Orders findByPaymentTransactionId(String paymentTransactionId);
+
     @Query(value = "SELECT new project_pet_backEnd.productMall.order.dto.response.OrdersNotCancelDTO(" +
             "o.ordNo, o.userId, o.ordStatus, o.ordPayStatus, o.ordPick, " +
             "o.ordCreate, o.ordFinish, o.ordFee, o.totalAmount, o.orderAmount, " +

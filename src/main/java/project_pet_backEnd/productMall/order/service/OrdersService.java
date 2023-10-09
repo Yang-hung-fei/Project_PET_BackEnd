@@ -1,6 +1,7 @@
 package project_pet_backEnd.productMall.order.service;
 
 import org.springframework.data.domain.Pageable;
+import project_pet_backEnd.productMall.order.dto.CallbackData;
 import project_pet_backEnd.productMall.order.dto.ChangeOrderStatusDTO;
 import project_pet_backEnd.productMall.order.dto.CreateOrderDTO;
 import project_pet_backEnd.productMall.order.dto.FonPaySaveDTO;
@@ -66,4 +67,9 @@ public interface OrdersService {
     //FonPay 創建金流付款成功後存入交易ID
 
     public ResultResponse<String> apiIdSaveByOrdNo(Integer ordNo, FonPaySaveDTO fonPaySaveDTO );
+
+
+    //FonPay callbackUrl
+    public String fonPayCallbackModify(CallbackData callbackData);
+
 }

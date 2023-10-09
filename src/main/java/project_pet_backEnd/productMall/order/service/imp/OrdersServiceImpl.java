@@ -326,4 +326,20 @@ public class OrdersServiceImpl implements OrdersService {
         rs.setMessage("成功!");
         return rs;
     }
+    @Transactional
+    @Override
+    public String fonPayCallbackModify(CallbackData callbackData) {
+        String status = callbackData.getStatus();
+        String paymentTransactionId = callbackData.getPaymentTransactionId();
+        System.out.println("2");
+
+        if("SUCCESS".equals(status)){
+            Orders orders = ordersRepository.findByPaymentTransactionId(paymentTransactionId);
+            orders.setOrdPayStatus(1);
+            ordersRepository.save(orders);
+            System.out.println("3");
+            return "SUCCESS";
+        }
+        return "SUCCESS";
+    }
 }
