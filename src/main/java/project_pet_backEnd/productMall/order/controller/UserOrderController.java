@@ -93,6 +93,8 @@ public class UserOrderController {
         return ResponseEntity.status(HttpStatus.OK).body(rs);
     }
 
+    //------------------------------------------------------------------------------------
+
     @ApiOperation(value = "v", notes = "儲存交易金流ID")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization_U", value = "User Access Token",
@@ -101,4 +103,14 @@ public class UserOrderController {
     public ResultResponse<String> saveFonPayId(@PathVariable Integer ordNo,@RequestBody FonPaySaveDTO fonPaySaveDTO){
         return ordersService.apiIdSaveByOrdNo(ordNo,fonPaySaveDTO);
     }
+
+//    @ApiOperation(value = "v", notes = "儲存交易金流ID")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "Authorization_U", value = "User Access Token",
+//                    required = true, dataType = "string", paramType = "header")})
+//    @PutMapping("/saveFonPayId/{ordNo}")
+//    public ResultResponse<String> saveFonPayId(@RequestBody FonPaySaveDTO fonPaySaveDTO){
+//        return ordersService.apiIdSaveByOrdNo(ordNo,fonPaySaveDTO);
+//    }
+
 }
