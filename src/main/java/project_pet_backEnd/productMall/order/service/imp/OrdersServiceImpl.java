@@ -23,6 +23,7 @@ import project_pet_backEnd.user.vo.User;
 import project_pet_backEnd.utils.commonDto.ResultResponse;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -331,11 +332,12 @@ public class OrdersServiceImpl implements OrdersService {
     public String fonPayCallbackModify(CallbackData callbackData) {
         String status = callbackData.getStatus();
         String paymentTransactionId = callbackData.getPaymentTransactionId();
-        System.out.println("2");
+
 
         if("SUCCESS".equals(status)){
             Orders orders = ordersRepository.findByPaymentTransactionId(paymentTransactionId);
             orders.setOrdPayStatus(1);
+            orders.setOrdFinish(LocalDateTime.now());
             ordersRepository.save(orders);
             System.out.println("3");
             return "SUCCESS";

@@ -23,16 +23,28 @@ public class FonPayController {
 
     //FonPay CallBack
     @PostMapping("/fonPayCallback")
-    public String fonPayCallback(@RequestBody CallbackData callbackData){
+    public String fonPayCallback(@RequestBody CallbackData callbackData) {
         try {
-        System.out.println("1");
-        return  ordersService.fonPayCallbackModify(callbackData);
+            return ordersService.fonPayCallbackModify(callbackData);
         } catch (Exception e) {
             e.printStackTrace();
-            // 处理异常情况
             return "SUCCESS";
         }
     }
 
-
+    //FonPay redirectUrl save SUCCESS
+    @PutMapping("/fonPayRedirectUrl")
+    public ResultResponse<String> fonPayRedirectUrl(@RequestBody CallbackData callbackData) {
+        try {
+            String s = ordersService.fonPayCallbackModify(callbackData);
+            ResultResponse<String> rs = new ResultResponse<>();
+            rs.setMessage(s);
+            return rs;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ResultResponse<String> rs = new ResultResponse<>();
+        rs.setMessage("SUCCESS");
+        return rs;
+    }
 }
