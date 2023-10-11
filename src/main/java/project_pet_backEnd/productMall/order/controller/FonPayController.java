@@ -12,7 +12,7 @@ import project_pet_backEnd.productMall.order.dto.FonPaySaveDTO;
 import project_pet_backEnd.productMall.order.service.OrdersService;
 import project_pet_backEnd.utils.commonDto.ResultResponse;
 
-@Api(tags="前台會員訂單相關功能")
+@Api(tags="FonPay相關功能")
 @Validated
 @RestController
 @RequestMapping("/customer")
